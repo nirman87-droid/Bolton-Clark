@@ -3,52 +3,57 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bolton Clarke — Group Financial Controller Point of View</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Syne:wght@400;500;600;700&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+<title>Bolton Clarke — Finance Operations Point of View</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet">
 <style>
 :root {
-  --red:       #C0392B;
-  --red-deep:  #8B1A11;
-  --sand:      #F4EDE3;
-  --sand-mid:  #E8DDD0;
-  --clay:      #C8A882;
-  --clay-dark: #9B7D5A;
-  --earth:     #4A3728;
-  --charcoal:  #1E1510;
-  --warm-off:  #FAF5EF;
-  --moss:      #5F7052;
-  --ink:       #1E1610;
-  --slate:     #3A3530;
+  --navy:      #0D1B2A;
+  --navy-mid:  #162336;
+  --navy-lt:   #1E3048;
+  --teal:      #1A9B8C;
+  --teal-lt:   #22BFB0;
+  --teal-dim:  #0F6B62;
+  --steel:     #3A5068;
+  --slate:     #4A6278;
+  --fog:       #F0F4F7;
+  --fog-mid:   #E2EAF0;
+  --fog-dk:    #C8D6E0;
+  --ink:       #0D1B2A;
+  --mist:      #F7FAFB;
+  --white:     #FFFFFF;
+  --gold:      #C9A84C;
+  --gold-dim:  #8A6E2E;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 
 body {
-  font-family: 'Lato', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-weight: 300;
-  background: var(--sand);
+  background: var(--navy);
   color: var(--ink);
-  line-height: 1.7;
+  line-height: 1.65;
 }
 
-/* ── DOTS NAV ── */
+/* ── NAV DOTS ── */
 .nav {
-  position: fixed; right: 24px; top: 50%; transform: translateY(-50%);
-  display: flex; flex-direction: column; gap: 10px; z-index: 200;
+  position: fixed; right: 22px; top: 50%;
+  transform: translateY(-50%);
+  display: flex; flex-direction: column; gap: 10px; z-index: 300;
 }
 .nav a {
-  width: 8px; height: 8px; border-radius: 50%;
-  border: 1.5px solid var(--clay); background: transparent;
-  opacity: 0.5; transition: all .25s;
+  width: 7px; height: 7px; border-radius: 50%;
+  border: 1.5px solid rgba(26,155,140,0.5);
+  background: transparent; opacity: 0.5;
+  transition: all .2s;
 }
 .nav a.active, .nav a:hover {
-  background: var(--red); border-color: var(--red); opacity: 1; transform: scale(1.4);
+  background: var(--teal); border-color: var(--teal);
+  opacity: 1; transform: scale(1.5);
 }
 
-/* ══════════════════
-   PAGE BASE
-══════════════════ */
+/* ── PAGE BASE ── */
 .page {
   min-height: 100vh;
   position: relative;
@@ -57,916 +62,749 @@ body {
   overflow: hidden;
 }
 
-/* ══════════════════
+/* ════════════════════════════
    PAGE 1 — COVER
-══════════════════ */
-#p1 {
-  background: var(--charcoal);
+════════════════════════════ */
+#p1 { background: var(--navy); }
+
+.p1-grid-overlay {
+  position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(26,155,140,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(26,155,140,0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
 }
 
-.p1-bg-texture {
+.p1-glow {
   position: absolute; inset: 0; pointer-events: none;
   background:
-    radial-gradient(ellipse 70% 60% at 80% 110%, rgba(139,26,17,0.35) 0%, transparent 60%),
-    radial-gradient(ellipse 40% 40% at 10% -5%, rgba(200,168,130,0.12) 0%, transparent 60%);
+    radial-gradient(ellipse 55% 45% at 92% 85%, rgba(26,155,140,0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 35% 35% at 8% 15%, rgba(201,168,76,0.06) 0%, transparent 55%);
 }
 
-.p1-line-top {
-  position: absolute; top: 0; left: 64px; right: 64px;
-  height: 3px;
-  background: linear-gradient(90deg, var(--red) 0%, var(--clay) 40%, transparent 100%);
+.p1-top-bar {
+  position: relative; z-index: 2;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 28px 64px;
+  border-bottom: 1px solid rgba(26,155,140,0.12);
 }
 
-/* ARM Hub alignment badge */
-.arm-badge {
-  position: absolute; top: 28px; right: 64px;
-  display: flex; align-items: center; gap: 10px;
-  font-family: 'Syne', sans-serif; font-size: 10px;
-  font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
-  color: rgba(200,168,130,0.55);
+.bc-wordmark {
+  display: flex; align-items: center; gap: 14px;
 }
-.arm-badge::before {
-  content: ''; width: 28px; height: 1px; background: rgba(200,168,130,0.35);
+.bc-icon {
+  width: 32px; height: 32px;
+  border: 2px solid var(--teal);
+  border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+}
+.bc-icon::before {
+  content: '';
+  width: 12px; height: 12px;
+  background: var(--teal);
+  border-radius: 50%;
+}
+.bc-name {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: rgba(240,244,247,0.55);
 }
 
-/* Alignment pill */
-.align-pill {
-  position: absolute; top: 28px; left: 64px;
-  background: rgba(192,57,43,0.15);
-  border: 1px solid rgba(192,57,43,0.4);
-  border-radius: 2px; padding: 4px 12px;
-  font-family: 'Syne', sans-serif; font-size: 9px;
-  font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
-  color: var(--clay);
+.arm-tag {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px; font-weight: 500;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--teal); opacity: 0.7;
+  display: flex; align-items: center; gap: 8px;
+}
+.arm-tag::before {
+  content: ''; width: 24px; height: 1px; background: var(--teal); opacity: 0.5;
 }
 
 .p1-inner {
   position: relative; z-index: 2;
-  display: flex; flex-direction: column;
+  flex: 1; display: flex; flex-direction: column;
   justify-content: space-between;
-  flex: 1;
-  padding: 88px 64px 52px;
+  padding: 52px 64px 48px;
 }
 
-.p1-top {
-  display: flex; align-items: center; gap: 14px;
-}
-
-.red-cross-mark {
-  width: 34px; height: 34px; position: relative; flex-shrink: 0;
-}
-.red-cross-mark::before, .red-cross-mark::after {
-  content: ''; position: absolute; background: var(--red); border-radius: 1.5px;
-}
-.red-cross-mark::before { width: 100%; height: 34%; top: 33%; left: 0; }
-.red-cross-mark::after  { width: 34%; height: 100%; top: 0; left: 33%; }
-
-.p1-org {
-  font-family: 'Syne', sans-serif; font-size: 12px;
-  font-weight: 400; letter-spacing: 0.14em; text-transform: uppercase;
-  color: rgba(200,168,130,0.6);
-}
-
-.p1-main { max-width: 720px; }
-
-/* The enterprise problem statement — echoing the ARM Hub */
-.enterprise-hook {
-  font-family: 'Syne', sans-serif; font-size: 11px;
-  font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase;
-  color: var(--red); margin-bottom: 20px;
+.pov-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--teal);
   display: flex; align-items: center; gap: 12px;
+  margin-bottom: 24px;
 }
-.enterprise-hook span {
-  display: block; width: 36px; height: 1px; background: var(--red);
+.pov-label::after {
+  content: ''; flex: 0 0 40px; height: 1px; background: var(--teal); opacity: 0.5;
 }
 
 .p1-headline {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: clamp(38px, 5.5vw, 66px);
-  font-weight: 600; line-height: 1.07;
-  color: var(--warm-off);
-  margin-bottom: 36px;
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: clamp(36px, 5.2vw, 68px);
+  font-weight: 400; line-height: 1.06;
+  color: var(--fog);
+  max-width: 700px;
+  margin-bottom: 32px;
 }
 .p1-headline em {
-  font-style: italic; color: var(--clay);
+  font-style: italic; color: var(--teal-lt);
 }
 
-/* The problem echo line */
-.problem-echo {
-  background: rgba(200,168,130,0.07);
-  border-left: 2px solid var(--red);
-  padding: 16px 20px;
-  margin-bottom: 36px;
-  max-width: 600px;
+.p1-context {
+  max-width: 560px;
+  border-left: 2px solid var(--teal);
+  padding: 14px 20px;
+  margin-bottom: 40px;
+  background: rgba(26,155,140,0.06);
 }
-.problem-echo p {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 15px; font-style: italic;
-  color: rgba(250,245,239,0.65); line-height: 1.6;
-}
-.problem-echo .echo-source {
-  font-family: 'Syne', sans-serif; font-size: 9.5px;
-  font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
-  color: var(--clay); opacity: 0.6; margin-top: 8px;
+.p1-context p {
+  font-family: 'DM Serif Display', serif;
+  font-style: italic; font-size: 14px;
+  color: rgba(240,244,247,0.62); line-height: 1.65;
 }
 
 .p1-recipient {
-  font-family: 'Syne', sans-serif; font-size: 12px;
-  font-weight: 400; color: rgba(250,245,239,0.4);
-  line-height: 2;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px; font-weight: 300;
+  color: rgba(240,244,247,0.38); line-height: 2.1;
 }
 .p1-recipient strong {
-  color: rgba(250,245,239,0.75); font-size: 14px; font-weight: 500; display: block;
+  display: block; font-size: 15px; font-weight: 500;
+  color: rgba(240,244,247,0.72); letter-spacing: 0.01em;
 }
 
 .p1-footer {
   display: flex; justify-content: space-between; align-items: center;
-  border-top: 1px solid rgba(200,168,130,0.12); padding-top: 22px;
+  border-top: 1px solid rgba(26,155,140,0.1);
+  padding-top: 20px; margin-top: 24px;
 }
-.p1-pg { font-family: 'Syne', sans-serif; font-size: 10px; color: rgba(200,168,130,0.3); letter-spacing: 0.2em; }
+.p1-pg {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px; letter-spacing: 0.2em;
+  color: rgba(240,244,247,0.22);
+}
 
-/* ══════════════════════════
-   PAGE 2 — THE PROBLEM + OPPORTUNITY
-══════════════════════════ */
-#p2 { background: var(--warm-off); }
+/* ════════════════════════════
+   PAGE 2 — OPERATIONS
+════════════════════════════ */
+#p2 { background: var(--mist); }
 
-.p2-strip {
-  background: var(--earth);
-  padding: 44px 64px 36px;
+.p2-header {
+  background: var(--navy-mid);
+  padding: 40px 64px 32px;
   position: relative;
+  border-bottom: 3px solid var(--teal);
 }
-.p2-strip::after {
-  content: ''; position: absolute; bottom: 0; left: 64px;
-  width: 56px; height: 2px; background: var(--red);
+.p2-header::before {
+  content: '';
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 3px;
+  background: linear-gradient(90deg, var(--teal) 0%, var(--teal-lt) 50%, transparent 100%);
 }
 
-.section-tag {
-  font-family: 'Syne', sans-serif; font-size: 9.5px;
-  font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase;
-  color: var(--clay); margin-bottom: 12px;
+.section-eyebrow {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 9.5px; font-weight: 600;
+  letter-spacing: 0.26em; text-transform: uppercase;
+  color: var(--teal); margin-bottom: 10px;
   display: flex; align-items: center; gap: 10px;
 }
-.section-tag::before {
-  content: ''; display: block; width: 20px; height: 1px; background: var(--clay); opacity: 0.6;
+.section-eyebrow::before {
+  content: ''; display: block; width: 16px; height: 1px;
+  background: var(--teal); opacity: 0.6;
 }
 
-.section-heading {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: clamp(24px, 3.2vw, 38px);
-  font-weight: 600; line-height: 1.15;
-  color: var(--warm-off);
+.section-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(22px, 3vw, 36px);
+  font-weight: 400; line-height: 1.18;
+  color: var(--fog);
 }
-.section-heading em { font-style: italic; color: var(--clay); }
+.section-title em { font-style: italic; color: var(--teal-lt); }
 
-/* Alignment callout — tying back to ARM Hub */
-.alignment-callout {
-  margin: 0 64px;
-  background: rgba(192,57,43,0.06);
-  border: 1px solid rgba(192,57,43,0.15);
-  border-top: 2px solid var(--red);
-  padding: 22px 28px;
-  display: flex; gap: 20px; align-items: flex-start;
+.p2-intro {
+  padding: 20px 64px;
+  border-bottom: 1px solid var(--fog-mid);
+  background: var(--fog);
 }
-.callout-icon {
-  font-size: 18px; flex-shrink: 0; margin-top: 2px;
-}
-.callout-text {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 15px; font-style: italic;
-  color: var(--slate); line-height: 1.65;
-}
-.callout-text strong {
-  font-style: normal; font-weight: 600; color: var(--earth);
-  font-family: 'Syne', sans-serif; font-size: 11px;
-  letter-spacing: 0.06em; display: block; margin-bottom: 4px;
-  text-transform: uppercase;
+.p2-intro p {
+  font-family: 'DM Serif Display', serif;
+  font-style: italic; font-size: 14.5px;
+  color: var(--steel); line-height: 1.65; max-width: 800px;
 }
 
-.p2-cols {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 0; flex: 1; margin: 24px 64px 0;
-  padding-bottom: 52px;
+/* 2x2 Operations grid */
+.ops-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3px;
+  flex: 1;
+  padding: 3px 64px 20px;
+  background: var(--fog-dk);
 }
 
-.p2-col-left { padding-right: 40px; border-right: 1px solid var(--sand-mid); }
-.p2-col-right { padding-left: 40px; }
-
-.col-label {
-  font-family: 'Syne', sans-serif; font-size: 10px;
-  font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
-  color: var(--clay-dark); margin-bottom: 22px; padding-bottom: 10px;
-  border-bottom: 1.5px solid var(--sand-mid);
+.op-card {
+  background: var(--white);
+  padding: 26px 28px 22px;
   position: relative;
+  animation: slideIn .5s ease both;
+  display: flex; flex-direction: column;
 }
-.col-label::after {
-  content: ''; position: absolute; bottom: -1.5px; left: 0;
-  width: 32px; height: 1.5px; background: var(--red);
-}
+.op-card:nth-child(1) { animation-delay: 0s; }
+.op-card:nth-child(2) { animation-delay: .07s; }
+.op-card:nth-child(3) { animation-delay: .14s; }
+.op-card:nth-child(4) { animation-delay: .21s; }
 
-/* Problem list */
-.problem-item {
-  display: grid; grid-template-columns: 28px 1fr;
-  gap: 12px; margin-bottom: 20px;
-  animation: fadeUp .55s ease both;
+.op-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0;
+  width: 3px; height: 100%;
 }
-.problem-item:nth-child(2) { animation-delay: .08s; }
-.problem-item:nth-child(3) { animation-delay: .16s; }
-.problem-item:nth-child(4) { animation-delay: .24s; }
+.op-card:nth-child(1)::before { background: var(--teal); }
+.op-card:nth-child(2)::before { background: var(--teal-dim); }
+.op-card:nth-child(3)::before { background: var(--steel); }
+.op-card:nth-child(4)::before { background: var(--slate); }
 
-.prob-num {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 28px; font-weight: 700; line-height: 1.1;
-  color: var(--clay); opacity: 0.4;
-}
-
-.prob-body h4 {
-  font-family: 'Syne', sans-serif; font-size: 12px;
-  font-weight: 600; color: var(--earth); margin-bottom: 5px;
+.op-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 42px; line-height: 1;
+  position: absolute; top: 16px; right: 20px;
+  color: var(--teal); opacity: 0.1;
+  pointer-events: none;
   letter-spacing: 0.02em;
 }
-.prob-body p {
-  font-size: 13px; color: var(--slate); line-height: 1.6;
+
+.op-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 9px; font-weight: 600;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--teal); margin-bottom: 6px;
+}
+.op-card:nth-child(2) .op-label { color: var(--teal-dim); }
+.op-card:nth-child(3) .op-label { color: var(--steel); }
+.op-card:nth-child(4) .op-label { color: var(--slate); }
+
+.op-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 17px; font-weight: 400; line-height: 1.25;
+  color: var(--navy); margin-bottom: 12px;
 }
 
-/* AI capability cards */
-.ai-card {
-  background: var(--earth);
-  padding: 20px 22px 16px;
-  margin-bottom: 14px;
+.op-body {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 14px; flex: 1;
+}
+
+.op-col-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 8.5px; font-weight: 600;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--slate); margin-bottom: 7px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--fog-mid);
+}
+
+.op-list {
+  list-style: none; padding: 0;
+}
+.op-list li {
+  font-size: 11.5px; color: #3A5068;
+  padding: 3px 0 3px 12px; position: relative;
+  line-height: 1.45;
+}
+.op-list li::before {
+  content: '–'; position: absolute; left: 0;
+  color: var(--teal); font-size: 11px;
+}
+
+.op-impact {
+  background: var(--fog);
+  border-top: 1px solid var(--fog-mid);
+  padding: 8px 12px;
+  margin: 10px -28px -22px;
+}
+.op-impact-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 8px; font-weight: 600;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--teal); margin-bottom: 4px;
+}
+.op-impact ul {
+  list-style: none; display: flex; flex-wrap: wrap; gap: 4px 14px;
+}
+.op-impact ul li {
+  font-size: 11px; color: var(--slate);
+  padding-left: 10px; position: relative;
+}
+.op-impact ul li::before {
+  content: '↑'; position: absolute; left: 0;
+  color: var(--teal); font-size: 9px;
+}
+
+.p2-footer {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 13px 64px;
+  background: var(--navy);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 9.5px; letter-spacing: 0.14em;
+  color: rgba(240,244,247,0.28);
+}
+.p2f-left { display: flex; align-items: center; gap: 10px; }
+.p2f-icon {
+  width: 14px; height: 14px;
+  border: 1.5px solid var(--teal);
+  border-radius: 2px;
+  display: flex; align-items: center; justify-content: center;
+}
+.p2f-icon::before {
+  content: '';
+  width: 5px; height: 5px;
+  background: var(--teal);
+  border-radius: 50%;
+}
+
+/* ════════════════════════════
+   PAGE 3 — MATURITY MODEL
+════════════════════════════ */
+#p3 { background: var(--fog); }
+
+.p3-header {
+  background: var(--navy-lt);
+  padding: 40px 64px 32px;
+  border-bottom: 3px solid var(--teal);
   position: relative;
+}
+.p3-header::after {
+  content: '';
+  position: absolute; bottom: -3px; left: 64px;
+  width: 56px; height: 3px;
+  background: var(--gold);
+}
+
+.maturity-intro {
+  padding: 20px 64px;
+  background: var(--white);
+  border-bottom: 1px solid var(--fog-mid);
+}
+.maturity-intro p {
+  font-family: 'DM Serif Display', serif;
+  font-style: italic; font-size: 14px;
+  color: var(--steel); line-height: 1.65;
+}
+
+/* Four-stage horizontal progression */
+.maturity-track {
+  padding: 24px 64px 0;
+  position: relative;
+}
+
+/* Connecting spine */
+.maturity-spine {
+  display: flex; gap: 3px;
+  margin-bottom: 3px;
+}
+.spine-seg {
+  flex: 1; height: 4px;
+  border-radius: 0;
+}
+.spine-seg:nth-child(1) { background: var(--fog-dk); }
+.spine-seg:nth-child(2) { background: var(--steel); opacity: 0.5; }
+.spine-seg:nth-child(3) { background: var(--teal-dim); }
+.spine-seg:nth-child(4) { background: var(--teal); }
+
+.maturity-stages {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 3px;
+}
+
+.m-stage {
+  padding: 24px 20px 20px;
+  position: relative;
+  display: flex; flex-direction: column;
   animation: fadeUp .55s ease both;
 }
-.ai-card:nth-child(2) { animation-delay: .1s; }
-.ai-card:nth-child(3) { animation-delay: .2s; }
-.ai-card:nth-child(4) { animation-delay: .3s; }
+.m-stage:nth-child(1) { background: var(--white); animation-delay: 0s; }
+.m-stage:nth-child(2) { background: var(--fog-mid); animation-delay: .08s; }
+.m-stage:nth-child(3) { background: var(--navy-lt); animation-delay: .16s; }
+.m-stage:nth-child(4) { background: var(--navy); animation-delay: .24s; }
 
-.ai-card::before {
-  content: ''; position: absolute; left: 0; top: 0; bottom: 0;
-  width: 2px; background: var(--red);
+.m-ghost-num {
+  position: absolute; top: 8px; right: 12px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 80px; line-height: 1;
+  pointer-events: none;
+  letter-spacing: 0.02em;
 }
+.m-stage:nth-child(1) .m-ghost-num,
+.m-stage:nth-child(2) .m-ghost-num { color: var(--navy); opacity: 0.05; }
+.m-stage:nth-child(3) .m-ghost-num,
+.m-stage:nth-child(4) .m-ghost-num { color: var(--teal-lt); opacity: 0.1; }
 
-.ai-card-label {
-  font-family: 'Syne', sans-serif; font-size: 10px;
-  font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;
-  color: var(--clay); margin-bottom: 6px;
+.m-tag {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 8.5px; font-weight: 600;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  margin-bottom: 5px;
 }
-.ai-card p {
-  font-size: 12.5px; color: rgba(250,245,239,0.6); line-height: 1.55;
-}
+.m-stage:nth-child(1) .m-tag { color: var(--slate); }
+.m-stage:nth-child(2) .m-tag { color: var(--steel); }
+.m-stage:nth-child(3) .m-tag { color: var(--teal-lt); opacity: 0.8; }
+.m-stage:nth-child(4) .m-tag { color: var(--teal-lt); }
 
-/* Page footer bar */
-.page-footer-bar {
-  background: var(--sand-mid);
-  padding: 16px 64px;
-  display: flex; justify-content: space-between; align-items: center;
-  border-top: 1px solid var(--clay);
+.m-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: 17px; font-weight: 400; line-height: 1.25;
+  margin-bottom: 10px;
 }
-.pf-left { display: flex; align-items: center; gap: 10px; }
-.pf-cross { width: 18px; height: 18px; position: relative; }
-.pf-cross::before, .pf-cross::after {
-  content: ''; position: absolute; background: var(--red); border-radius: 1px;
-}
-.pf-cross::before { width: 100%; height: 34%; top: 33%; left: 0; }
-.pf-cross::after  { width: 34%; height: 100%; top: 0; left: 33%; }
-.pf-org { font-family: 'Syne', sans-serif; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--clay-dark); opacity: 0.6; }
-.pf-pg { font-family: 'Syne', sans-serif; font-size: 10px; letter-spacing: 0.18em; color: var(--clay-dark); opacity: 0.4; }
+.m-stage:nth-child(1) .m-name,
+.m-stage:nth-child(2) .m-name { color: var(--navy); }
+.m-stage:nth-child(3) .m-name,
+.m-stage:nth-child(4) .m-name { color: var(--fog); }
 
-/* ══════════════════════════
-   PAGE 3 — ROADMAP + CLOSE
-══════════════════════════ */
-#p3 { background: var(--sand); }
+.m-desc {
+  font-size: 11.5px; line-height: 1.6; margin-bottom: 12px; flex: 1;
+}
+.m-stage:nth-child(1) .m-desc,
+.m-stage:nth-child(2) .m-desc { color: var(--slate); }
+.m-stage:nth-child(3) .m-desc { color: rgba(240,244,247,0.62); }
+.m-stage:nth-child(4) .m-desc { color: rgba(240,244,247,0.52); }
 
-.p3-strip {
-  background: var(--earth);
-  padding: 44px 64px 36px;
-  position: relative;
+.m-caps {
+  list-style: none; padding: 0;
+  border-top: 1px solid rgba(0,0,0,0.07);
+  padding-top: 10px; margin-bottom: 12px;
 }
-.p3-strip::after {
-  content: ''; position: absolute; bottom: 0; left: 64px;
-  width: 56px; height: 2px; background: var(--clay);
-}
-.p3-strip .section-heading { color: var(--warm-off); }
+.m-stage:nth-child(3) .m-caps,
+.m-stage:nth-child(4) .m-caps { border-top-color: rgba(255,255,255,0.08); }
 
-.p3-phases {
-  display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 3px;
-  margin: 28px 64px 0;
+.m-caps li {
+  font-size: 11px; line-height: 1.5;
+  padding: 3px 0 3px 13px; position: relative;
 }
+.m-caps li::before {
+  content: '–'; position: absolute; left: 0; font-size: 10px;
+}
+.m-stage:nth-child(1) .m-caps li { color: #3A5068; }
+.m-stage:nth-child(1) .m-caps li::before { color: var(--teal); }
+.m-stage:nth-child(2) .m-caps li { color: #3A5068; }
+.m-stage:nth-child(2) .m-caps li::before { color: var(--steel); }
+.m-stage:nth-child(3) .m-caps li { color: rgba(240,244,247,0.6); }
+.m-stage:nth-child(3) .m-caps li::before { color: var(--teal-lt); opacity: 0.7; }
+.m-stage:nth-child(4) .m-caps li { color: rgba(240,244,247,0.48); }
+.m-stage:nth-child(4) .m-caps li::before { color: var(--teal); opacity: 0.6; }
 
-.phase {
-  padding: 30px 26px 24px;
-  position: relative;
-  animation: fadeUp .6s ease both;
+.m-badge {
+  display: inline-block;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 9px; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 5px 10px; border-radius: 2px;
+  margin-top: auto;
 }
-.phase:nth-child(1) { background: var(--warm-off); animation-delay: 0s; }
-.phase:nth-child(2) { background: var(--sand-mid); animation-delay: .1s; }
-.phase:nth-child(3) { background: var(--earth); color: var(--warm-off); animation-delay: .2s; }
-
-.phase::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+.badge-current {
+  background: rgba(26,155,140,0.1);
+  border: 1px solid rgba(26,155,140,0.3);
+  color: var(--teal);
 }
-.phase:nth-child(1)::before { background: var(--clay); }
-.phase:nth-child(2)::before { background: var(--red); }
-.phase:nth-child(3)::before { background: var(--clay); }
-
-.phase-bg-num {
-  position: absolute; top: 14px; right: 18px;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 64px; font-weight: 700; line-height: 1;
-  color: var(--clay); opacity: 0.12;
+.badge-near {
+  background: rgba(26,155,140,0.12);
+  border: 1px solid rgba(26,155,140,0.3);
+  color: var(--teal-lt);
 }
-.phase:nth-child(3) .phase-bg-num { opacity: 0.18; }
-
-.phase-tag {
-  font-family: 'Syne', sans-serif; font-size: 9px;
-  font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
-  color: var(--clay-dark); margin-bottom: 8px;
-}
-.phase:nth-child(2) .phase-tag { color: var(--red-deep); }
-.phase:nth-child(3) .phase-tag { color: var(--clay); }
-
-.phase-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 18px; font-weight: 600; line-height: 1.2;
-  color: var(--earth); margin-bottom: 14px;
-}
-.phase:nth-child(3) .phase-title { color: var(--warm-off); }
-
-.phase-list { list-style: none; }
-.phase-list li {
-  font-size: 12px; color: #5a4a3a; padding: 5px 0 5px 16px;
-  border-bottom: 1px solid rgba(0,0,0,0.05);
-  position: relative; line-height: 1.5;
-}
-.phase-list li::before {
-  content: '—'; position: absolute; left: 0;
-  color: var(--clay); font-size: 11px;
-}
-.phase:nth-child(3) .phase-list li {
-  color: rgba(250,245,239,0.65);
-  border-bottom-color: rgba(255,255,255,0.07);
+.badge-far {
+  background: rgba(201,168,76,0.1);
+  border: 1px solid rgba(201,168,76,0.25);
+  color: var(--gold);
 }
 
-.phase-outcome {
-  margin-top: 14px; padding: 9px 12px;
-  background: rgba(0,0,0,0.04);
-  font-family: 'Syne', sans-serif; font-size: 10.5px;
-  font-weight: 500; color: var(--clay-dark); font-style: italic;
-  line-height: 1.5;
-}
-.phase:nth-child(3) .phase-outcome {
-  background: rgba(255,255,255,0.07); color: var(--clay);
-}
-
-/* Why now band */
-.why-now {
-  margin: 28px 64px 0;
+/* Why now + CTA */
+.p3-bottom {
   display: grid; grid-template-columns: 1.1fr 1fr;
   gap: 3px;
+  margin: 3px 64px 0;
 }
 
-.why-quote-block {
-  background: var(--red-deep);
-  padding: 36px 36px 36px 40px;
-  position: relative;
+.why-band {
+  background: var(--teal-dim);
+  padding: 24px 28px;
 }
-.why-quote-block::before {
-  content: '\201C';
-  position: absolute; top: 10px; left: 28px;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 80px; color: rgba(200,168,130,0.25); line-height: 1;
-}
-.why-quote {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(16px, 2vw, 22px);
-  font-weight: 400; font-style: italic;
-  color: rgba(250,245,239,0.9); line-height: 1.55;
-  padding-top: 16px;
-}
-
-/* ARM alignment note */
-.arm-align-note {
-  background: rgba(74,55,40,0.07);
-  border-top: 1.5px solid var(--clay);
-  padding: 12px 40px;
-  margin-top: 3px;
-}
-.arm-align-note p {
-  font-family: 'Syne', sans-serif; font-size: 10px;
-  font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
-  color: var(--clay-dark); opacity: 0.7;
-  display: flex; align-items: center; gap: 8px;
-}
-.arm-align-note p::before {
-  content: '↗'; font-size: 12px; color: var(--red);
-}
-
-.why-right-block {
-  background: var(--earth);
-  padding: 36px 32px;
-}
-.why-right-tag {
-  font-family: 'Syne', sans-serif; font-size: 9px;
-  font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
-  color: var(--clay); margin-bottom: 18px;
+.why-band-tag {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 9px; font-weight: 600;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: rgba(240,244,247,0.5); margin-bottom: 14px;
 }
 .why-item {
-  display: flex; gap: 10px; align-items: flex-start; margin-bottom: 12px;
+  display: flex; gap: 10px; align-items: flex-start;
+  margin-bottom: 10px;
 }
 .why-dot {
   width: 5px; height: 5px; border-radius: 50%;
-  background: var(--clay); flex-shrink: 0; margin-top: 7px;
+  background: var(--teal-lt); flex-shrink: 0;
+  margin-top: 6px;
 }
-.why-text { font-size: 12.5px; color: rgba(250,245,239,0.68); line-height: 1.55; }
+.why-text {
+  font-size: 12px; color: rgba(240,244,247,0.72); line-height: 1.55;
+}
 
-/* Next steps */
-.next-steps {
-  margin: 20px 64px 0;
-  padding: 22px 28px;
-  background: var(--warm-off);
-  border-left: 3px solid var(--red);
-  display: flex; align-items: center; justify-content: space-between; gap: 24px;
+.cta-band {
+  background: var(--navy-mid);
+  padding: 24px 28px;
+  display: flex; flex-direction: column; justify-content: center;
 }
-.ns-text {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 16px; font-style: italic; color: var(--earth); line-height: 1.5;
+.cta-quote {
+  font-family: 'DM Serif Display', serif;
+  font-style: italic; font-size: 16px;
+  color: rgba(240,244,247,0.78); line-height: 1.6;
+  margin-bottom: 18px;
 }
-.ns-cta {
-  font-family: 'Syne', sans-serif; font-size: 10px;
-  font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
-  color: var(--red); white-space: nowrap; border-bottom: 1px solid var(--red);
-  padding-bottom: 2px;
+.cta-action {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--teal);
+  border-bottom: 1px solid rgba(26,155,140,0.4);
+  padding-bottom: 2px; display: inline-block;
 }
 
 .p3-footer {
-  background: var(--charcoal);
-  padding: 20px 64px;
   display: flex; justify-content: space-between; align-items: center;
-  margin-top: auto;
+  padding: 13px 64px;
+  background: var(--navy);
+  margin-top: 3px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 9.5px; letter-spacing: 0.14em;
+  color: rgba(240,244,247,0.25);
 }
 .p3f-left { display: flex; align-items: center; gap: 10px; }
-.p3f-cross { width: 18px; height: 18px; position: relative; }
-.p3f-cross::before, .p3f-cross::after {
-  content: ''; position: absolute; background: var(--red); border-radius: 1px;
+.p3f-icon {
+  width: 14px; height: 14px;
+  border: 1.5px solid var(--teal); border-radius: 2px;
+  display: flex; align-items: center; justify-content: center;
 }
-.p3f-cross::before { width: 100%; height: 34%; top: 33%; left: 0; }
-.p3f-cross::after  { width: 34%; height: 100%; top: 0; left: 33%; }
-.p3f-org { font-family: 'Syne', sans-serif; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(200,168,130,0.4); }
-.p3f-pg { font-family: 'Syne', sans-serif; font-size: 10px; letter-spacing: 0.18em; color: rgba(200,168,130,0.25); }
-.p3f-hub { font-family: 'Syne', sans-serif; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(200,168,130,0.3); }
+.p3f-icon::before {
+  content: ''; width: 5px; height: 5px;
+  background: var(--teal); border-radius: 50%;
+}
 
-/* Animations */
+/* ════════════════════════════
+   PAGE 4 — DELIVERY TABLE
+════════════════════════════ */
+#p4 { background: var(--mist); }
+
+.p4-header {
+  background: var(--navy);
+  padding: 32px 64px 26px;
+  border-bottom: 3px solid var(--teal);
+  position: relative;
+}
+.p4-header::before {
+  content: '';
+  position: absolute; left: 0; top: 0;
+  width: 4px; height: 100%;
+  background: var(--teal);
+}
+.p4-eyebrow {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 9.5px; font-weight: 600;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--teal); opacity: 0.8; margin-bottom: 6px;
+}
+.p4-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(20px, 2.6vw, 28px);
+  font-weight: 400; color: var(--fog); line-height: 1.2;
+}
+.p4-subtitle {
+  font-family: 'DM Serif Display', serif;
+  font-style: italic; font-size: 14px;
+  color: rgba(26,155,140,0.75); margin-top: 4px;
+}
+
+.p4-wrap {
+  flex: 1; padding: 20px 64px 0; overflow-x: auto;
+}
+
+.p4-table {
+  width: 100%; border-collapse: separate; border-spacing: 0;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+}
+
+.p4-table thead tr { background: var(--navy-lt); }
+.p4-table thead th {
+  padding: 9px 12px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 8px; font-weight: 600;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--teal); opacity: 0.8;
+  border-bottom: 2px solid var(--teal);
+  white-space: nowrap; vertical-align: bottom;
+}
+.p4-table thead th:first-child {
+  border-left: 3px solid var(--teal); padding-left: 14px;
+}
+
+.p4-table tbody tr { transition: background .15s; }
+.p4-table tbody tr:hover { background: rgba(26,155,140,0.04); }
+.p4-table tbody td {
+  padding: 10px 12px; vertical-align: top;
+  line-height: 1.45; color: var(--steel);
+  border-bottom: 1px solid var(--fog-mid);
+}
+.p4-table tbody td:first-child {
+  border-left: 3px solid transparent; padding-left: 14px;
+}
+
+/* Phase accent colours */
+.p4-table tbody tr:nth-child(1) td:first-child { border-left-color: var(--teal); }
+.p4-table tbody tr:nth-child(2) td:first-child { border-left-color: var(--teal-dim); }
+.p4-table tbody tr:nth-child(3) td:first-child { border-left-color: var(--teal-dim); }
+.p4-table tbody tr:nth-child(4) td:first-child { border-left-color: var(--steel); }
+.p4-table tbody tr:nth-child(5) td:first-child { border-left-color: var(--steel); }
+.p4-table tbody tr:nth-child(6) td:first-child { border-left-color: var(--slate); }
+.p4-table tbody tr:nth-child(7) td:first-child { border-left-color: var(--slate); }
+
+.p4-table tbody tr.group-break td { border-top: 2px solid rgba(26,155,140,0.2); }
+
+.ph-cell { min-width: 155px; }
+.ph-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 20px; height: 20px; border-radius: 3px;
+  background: var(--navy-lt); color: var(--teal);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 9px; font-weight: 600; margin-bottom: 4px;
+}
+.ph-name {
+  display: block;
+  font-family: 'DM Serif Display', serif;
+  font-size: 13px; color: var(--navy); line-height: 1.3; margin-top: 2px;
+}
+.ph-time {
+  display: block;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 8.5px; font-weight: 600; letter-spacing: 0.08em;
+  color: var(--teal); text-transform: uppercase; margin-top: 3px;
+}
+
+.focus-cell {
+  font-style: italic; color: var(--slate);
+  font-size: 11px; min-width: 105px;
+}
+
+.act-list, .del-list {
+  list-style: none; padding: 0; margin: 0;
+}
+.act-list li, .del-list li {
+  padding-left: 12px; position: relative;
+  margin-bottom: 3px; font-size: 11px;
+  color: var(--steel); line-height: 1.4;
+}
+.act-list li::before { content: '–'; position: absolute; left: 0; color: var(--teal); }
+.del-list li::before { content: '→'; position: absolute; left: 0; color: var(--teal); font-size: 9px; top: 1px; }
+
+.val-cell {
+  font-size: 10.5px; color: var(--slate);
+  font-style: italic; line-height: 1.5; min-width: 150px;
+}
+
+.p4-footer {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 64px;
+  background: var(--navy);
+  margin-top: 18px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 9.5px; letter-spacing: 0.14em;
+  color: rgba(240,244,247,0.25);
+}
+.p4f-left { display: flex; align-items: center; gap: 10px; }
+.p4f-icon {
+  width: 14px; height: 14px;
+  border: 1.5px solid var(--teal); border-radius: 2px;
+  display: flex; align-items: center; justify-content: center;
+}
+.p4f-icon::before {
+  content: ''; width: 5px; height: 5px;
+  background: var(--teal); border-radius: 50%;
+}
+
+/* ── ANIMATIONS ── */
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(20px); }
+  from { opacity: 0; transform: translateY(18px); }
   to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-12px); }
+  to   { opacity: 1; transform: translateX(0); }
 }
 
 .p1-inner > * { animation: fadeUp .65s ease both; }
 .p1-inner > *:nth-child(1) { animation-delay: .1s; }
 .p1-inner > *:nth-child(2) { animation-delay: .25s; }
 .p1-inner > *:nth-child(3) { animation-delay: .4s; }
-.p1-inner > *:nth-child(4) { animation-delay: .55s; }
 
-/* Responsive */
-@media (max-width: 860px) {
-  .p1-inner, .p2-cols, .p3-phases, .why-now, .next-steps, .alignment-callout, .arm-align-note { margin-left: 28px; margin-right: 28px; }
-  .p2-strip, .p1-inner, .p3-strip, .page-footer-bar, .p3-footer { padding-left: 28px; padding-right: 28px; }
-  .align-pill { left: 28px; }
-  .arm-badge { right: 28px; }
-  .p2-cols { grid-template-columns: 1fr; }
-  .p2-col-left { border-right: none; border-bottom: 1px solid var(--sand-mid); padding-right: 0; padding-bottom: 28px; margin-bottom: 28px; }
-  .p2-col-right { padding-left: 0; }
-  .p3-phases { grid-template-columns: 1fr; }
-  .why-now { grid-template-columns: 1fr; }
-}
-
-/* ══════════════════════════
-   PAGE 4 — PHASED APPROACH
-══════════════════════════ */
-#p4 {
-  background: var(--warm-off);
-}
-
-.p4-strip {
-  background: var(--charcoal);
-  padding: 28px 64px 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  border-bottom: 3px solid var(--red);
-  position: relative;
-}
-.p4-strip::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0;
-  width: 4px; height: 100%;
-  background: var(--red);
-}
-.p4-eyebrow {
-  font-family: 'Syne', sans-serif;
-  font-size: 9.5px;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--clay);
-  opacity: 0.7;
-}
-.p4-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(22px, 3vw, 30px);
-  font-weight: 600;
-  color: var(--warm-off);
-  line-height: 1.15;
-}
-.p4-subtitle {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: clamp(14px, 1.8vw, 18px);
-  color: var(--clay);
-  margin-top: 2px;
-}
-
-.p4-table-wrap {
-  flex: 1;
-  padding: 24px 64px 0;
-  overflow-x: auto;
-}
-
-.p4-table {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
-  font-family: 'Lato', sans-serif;
-  font-size: 11.5px;
-}
-
-/* Column header row */
-.p4-table thead tr {
-  background: var(--earth);
-}
-.p4-table thead th {
-  padding: 9px 11px 9px;
-  font-family: 'Syne', sans-serif;
-  font-size: 8px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--clay);
-  border-bottom: 2px solid var(--red);
-  white-space: nowrap;
-  vertical-align: bottom;
-}
-.p4-table thead th:first-child {
-  border-left: 3px solid var(--red);
-  padding-left: 14px;
-}
-
-/* Phase rows */
-.p4-table tbody tr {
-  border-bottom: 1px solid rgba(74,55,40,0.12);
-  transition: background 0.15s;
-}
-.p4-table tbody tr:hover {
-  background: rgba(200,168,130,0.07);
-}
-.p4-table tbody td {
-  padding: 10px 11px;
-  vertical-align: top;
-  line-height: 1.45;
-  color: var(--slate);
-  border-bottom: 1px solid rgba(74,55,40,0.10);
-}
-.p4-table tbody td:first-child {
-  border-left: 3px solid transparent;
-  padding-left: 14px;
-}
-
-/* Phase number + name cell */
-.phase-cell {
-  min-width: 160px;
-}
-.phase-num {
-  display: inline-block;
-  width: 20px; height: 20px;
-  border-radius: 50%;
-  background: var(--earth);
-  color: var(--clay);
-  font-family: 'Syne', sans-serif;
-  font-size: 9px;
-  font-weight: 700;
-  line-height: 20px;
-  text-align: center;
-  margin-bottom: 4px;
-  flex-shrink: 0;
-}
-.phase-name {
-  font-family: 'Cormorant Garamond', serif;
-  font-weight: 600;
-  font-size: 13px;
-  color: var(--earth);
-  line-height: 1.3;
-  display: block;
-  margin-top: 2px;
-}
-.phase-timeline {
-  font-family: 'Syne', sans-serif;
-  font-size: 8.5px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  color: var(--red);
-  text-transform: uppercase;
-  display: block;
-  margin-top: 4px;
-}
-
-/* Focus area */
-.focus-cell {
-  min-width: 110px;
-  font-style: italic;
-  color: var(--clay-dark);
-  font-size: 11px;
-}
-
-/* Activities list */
-.activities-cell {
-  min-width: 180px;
-}
-.act-list {
-  list-style: none;
-  padding: 0; margin: 0;
-}
-.act-list li {
-  padding-left: 12px;
-  position: relative;
-  margin-bottom: 3px;
-  font-size: 11px;
-  color: var(--slate);
-}
-.act-list li::before {
-  content: '–';
-  position: absolute; left: 0;
-  color: var(--clay);
-}
-
-/* Deliverables */
-.deliv-cell {
-  min-width: 155px;
-}
-.deliv-list {
-  list-style: none;
-  padding: 0; margin: 0;
-}
-.deliv-list li {
-  padding-left: 14px;
-  position: relative;
-  margin-bottom: 3px;
-  font-size: 11px;
-  color: var(--slate);
-}
-.deliv-list li::before {
-  content: '→';
-  position: absolute; left: 0;
-  color: var(--red);
-  font-size: 9px;
-  top: 1px;
-}
-
-/* Value measurement */
-.value-cell {
-  min-width: 160px;
-  font-size: 10.5px;
-  color: var(--clay-dark);
-  font-style: italic;
-  line-height: 1.5;
-}
-
-/* Row accent colours by phase group */
-.p4-table tbody tr:nth-child(1) td:first-child { border-left-color: #C0392B; }
-.p4-table tbody tr:nth-child(2) td:first-child { border-left-color: #9B2E21; }
-.p4-table tbody tr:nth-child(3) td:first-child { border-left-color: #7D1E14; }
-.p4-table tbody tr:nth-child(4) td:first-child { border-left-color: #C0392B; }
-.p4-table tbody tr:nth-child(5) td:first-child { border-left-color: #9B7D5A; }
-.p4-table tbody tr:nth-child(6) td:first-child { border-left-color: #7A5C38; }
-.p4-table tbody tr:nth-child(7) td:first-child { border-left-color: #5F4528; }
-
-/* Phase group dividers */
-.p4-table tbody tr.phase-group-break td {
-  border-top: 2px solid rgba(192,57,43,0.25);
-}
-
-.p4-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 64px;
-  background: var(--charcoal);
-  margin-top: 20px;
-  font-family: 'Syne', sans-serif;
-  font-size: 9px;
-  letter-spacing: 0.12em;
-  color: rgba(200,168,130,0.35);
-}
-.p4f-left { display: flex; align-items: center; gap: 10px; }
-.p4f-cross {
-  width: 12px; height: 12px;
-  background: var(--red);
-  clip-path: polygon(38% 0,62% 0,62% 38%,100% 38%,100% 62%,62% 62%,62% 100%,38% 100%,38% 62%,0 62%,0 38%,38% 38%);
-}
-.p4f-org { text-transform: uppercase; letter-spacing: 0.18em; }
-
+/* ── RESPONSIVE ── */
 @media (max-width: 900px) {
-  .p4-table-wrap { padding: 16px 28px 0; }
-  .p4-strip { padding: 20px 28px 18px; }
-  .p4-footer { padding: 12px 28px; }
-  .p4-table { font-size: 10px; }
-}
-
-
-/* ══════════════════════════
-   PAGE 3 — FINANCIAL INTELLIGENCE MATURITY
-══════════════════════════ */
-.maturity-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 3px;
-  margin: 28px 64px 0;
-}
-
-.maturity-stage {
-  position: relative;
-  padding: 28px 22px 22px;
-  display: flex;
-  flex-direction: column;
-  animation: fadeUp .6s ease both;
-}
-.maturity-stage:nth-child(1) { background: var(--warm-off); animation-delay: 0s; }
-.maturity-stage:nth-child(2) { background: var(--sand-mid); animation-delay: .08s; }
-.maturity-stage:nth-child(3) { background: var(--earth); animation-delay: .16s; }
-.maturity-stage:nth-child(4) { background: var(--charcoal); animation-delay: .24s; }
-
-/* Top accent bar */
-.maturity-stage::before {
-  content: '';
-  position: absolute; top: 0; left: 0; right: 0;
-  height: 3px;
-}
-.maturity-stage:nth-child(1)::before { background: var(--clay); }
-.maturity-stage:nth-child(2)::before { background: var(--clay-dark); }
-.maturity-stage:nth-child(3)::before { background: var(--red); }
-.maturity-stage:nth-child(4)::before { background: var(--red); }
-
-/* Stage number ghost */
-.maturity-bg-num {
-  position: absolute; top: 10px; right: 14px;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 72px; font-weight: 700; line-height: 1;
-  opacity: 0.09;
-  pointer-events: none;
-}
-.maturity-stage:nth-child(1) .maturity-bg-num,
-.maturity-stage:nth-child(2) .maturity-bg-num { color: var(--earth); opacity: 0.08; }
-.maturity-stage:nth-child(3) .maturity-bg-num,
-.maturity-stage:nth-child(4) .maturity-bg-num { color: var(--clay); opacity: 0.14; }
-
-/* Stage label */
-.maturity-label {
-  font-family: 'Syne', sans-serif;
-  font-size: 8.5px; font-weight: 700;
-  letter-spacing: 0.22em; text-transform: uppercase;
-  margin-bottom: 6px;
-}
-.maturity-stage:nth-child(1) .maturity-label { color: var(--clay-dark); }
-.maturity-stage:nth-child(2) .maturity-label { color: var(--clay-dark); }
-.maturity-stage:nth-child(3) .maturity-label { color: var(--clay); }
-.maturity-stage:nth-child(4) .maturity-label { color: var(--clay); }
-
-/* Stage name */
-.maturity-name {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 19px; font-weight: 600; line-height: 1.2;
-  margin-bottom: 10px;
-}
-.maturity-stage:nth-child(1) .maturity-name,
-.maturity-stage:nth-child(2) .maturity-name { color: var(--earth); }
-.maturity-stage:nth-child(3) .maturity-name,
-.maturity-stage:nth-child(4) .maturity-name { color: var(--warm-off); }
-
-/* Descriptor */
-.maturity-desc {
-  font-size: 12px; line-height: 1.6;
-  margin-bottom: 14px; flex: 1;
-}
-.maturity-stage:nth-child(1) .maturity-desc,
-.maturity-stage:nth-child(2) .maturity-desc { color: var(--slate); }
-.maturity-stage:nth-child(3) .maturity-desc { color: rgba(250,245,239,0.65); }
-.maturity-stage:nth-child(4) .maturity-desc { color: rgba(250,245,239,0.55); }
-
-/* Capability list */
-.maturity-caps {
-  list-style: none; padding: 0; margin: 0 0 14px;
-  border-top: 1px solid rgba(0,0,0,0.07);
-  padding-top: 12px;
-}
-.maturity-stage:nth-child(3) .maturity-caps,
-.maturity-stage:nth-child(4) .maturity-caps { border-top-color: rgba(255,255,255,0.08); }
-
-.maturity-caps li {
-  font-size: 11.5px; line-height: 1.5;
-  padding: 4px 0 4px 14px; position: relative;
-}
-.maturity-caps li::before {
-  content: '–'; position: absolute; left: 0;
-  font-size: 11px;
-}
-.maturity-stage:nth-child(1) .maturity-caps li { color: #5a4a3a; }
-.maturity-stage:nth-child(1) .maturity-caps li::before { color: var(--clay); }
-.maturity-stage:nth-child(2) .maturity-caps li { color: #5a4a3a; }
-.maturity-stage:nth-child(2) .maturity-caps li::before { color: var(--clay-dark); }
-.maturity-stage:nth-child(3) .maturity-caps li { color: rgba(250,245,239,0.6); }
-.maturity-stage:nth-child(3) .maturity-caps li::before { color: var(--clay); }
-.maturity-stage:nth-child(4) .maturity-caps li { color: rgba(250,245,239,0.5); }
-.maturity-stage:nth-child(4) .maturity-caps li::before { color: var(--clay); }
-
-/* Bolton Clarke indicator */
-.maturity-indicator {
-  font-family: 'Syne', sans-serif;
-  font-size: 9.5px; font-weight: 600;
-  letter-spacing: 0.1em;
-  padding: 6px 10px;
-  border-radius: 2px;
-  display: inline-block;
-  margin-top: auto;
-}
-.arc-current {
-  background: rgba(192,57,43,0.12);
-  border: 1px solid rgba(192,57,43,0.35);
-  color: var(--red);
-}
-.arc-target {
-  background: rgba(200,168,130,0.1);
-  border: 1px solid rgba(200,168,130,0.3);
-  color: var(--clay-dark);
-}
-.maturity-stage:nth-child(3) .arc-target,
-.maturity-stage:nth-child(4) .arc-target {
-  color: var(--clay);
-  border-color: rgba(200,168,130,0.25);
-}
-
-/* Progression arrow between stages */
-.maturity-arrow {
-  display: none; /* handled by grid gap + stage design */
-}
-
-@media (max-width: 900px) {
-  .maturity-grid { grid-template-columns: 1fr 1fr; margin: 20px 28px 0; }
+  .p1-inner, .p2-header, .p3-header, .p4-header { padding-left: 28px; padding-right: 28px; }
+  .p1-top-bar { padding: 20px 28px; }
+  .ops-grid { padding: 3px 28px 16px; grid-template-columns: 1fr; }
+  .maturity-track { padding: 20px 28px 0; }
+  .maturity-stages { grid-template-columns: 1fr 1fr; }
+  .p3-bottom { grid-template-columns: 1fr; margin: 3px 28px 0; }
+  .p4-wrap { padding: 16px 28px 0; }
+  .p2-footer, .p3-footer, .p4-footer { padding-left: 28px; padding-right: 28px; }
+  .maturity-intro, .p2-intro { padding-left: 28px; padding-right: 28px; }
 }
 @media (max-width: 560px) {
-  .maturity-grid { grid-template-columns: 1fr; }
+  .maturity-stages { grid-template-columns: 1fr; }
+  .op-body { grid-template-columns: 1fr; }
 }
-
 </style>
 </head>
 <body>
 
 <nav class="nav">
   <a href="#p1" class="active" title="Cover"></a>
-  <a href="#p2" title="The Problem & Opportunity"></a>
+  <a href="#p2" title="Finance Operations"></a>
   <a href="#p3" title="Financial Intelligence Maturity"></a>
-  <a href="#p4" title="Delivery Approach"></a>
+  <a href="#p4" title="Delivery Roadmap"></a>
 </nav>
 
 <!-- ══════════════ PAGE 1 — COVER ══════════════ -->
 <section class="page" id="p1">
-  <div class="p1-bg-texture"></div>
-  <div class="p1-line-top"></div>
-  <div class="align-pill">Aligned with ARM Hub Enterprise AI Strategy</div>
-  <div class="arm-badge">Confidential · Finance Advisory</div>
+  <div class="p1-grid-overlay"></div>
+  <div class="p1-glow"></div>
+
+  <div class="p1-top-bar">
+    <div class="bc-wordmark">
+      <div class="bc-icon"></div>
+      <span class="bc-name">Bolton Clarke</span>
+    </div>
+    <div class="arm-tag">ARM Hub · Confidential Advisory</div>
+  </div>
 
   <div class="p1-inner">
-    <div class="p1-top">
-      <div class="red-cross-mark"></div>
-      <span class="p1-org">Bolton Clarke</span>
-    </div>
-
-    <div class="p1-main">
-      <div class="enterprise-hook"><span></span>Point of View</div>
+    <div>
+      <div class="pov-label">Point of View</div>
       <h1 class="p1-headline">
-        The Next Phase of<br>
-        <em>Finance Efficiency</em><br>
-        at Scale — AI-Enabled<br>Operations Optimisation
+        AI-Enabled<br>
+        <em>Finance Operations</em><br>
+        Optimisation
       </h1>
 
-      <div class="problem-echo">
-        <p>At $1.6B revenue and 16,000 employees, small finance inefficiencies multiply quickly. The opportunity is not system replacement — it is embedding intelligence across workflows to reduce manual friction and accelerate cycle times.</p>
-        <div class="echo-source">↗ Aligned with ARM Hub Enterprise AI Agent Strategy</div>
+      <div class="p1-context">
+        <p>At $1.6B revenue and 16,000 employees, inefficiencies rarely stem from missing systems. The friction sits within — and the next phase of optimisation requires embedding intelligence across existing finance workflows.</p>
       </div>
 
       <div class="p1-recipient">
         Prepared for
         <strong>Mr Warren Pereira</strong>
-        Chief Financial Officer · Bolton Clarke
+        Group Financial Controller · Bolton Clarke
       </div>
     </div>
 
@@ -977,372 +815,429 @@ body {
   </div>
 </section>
 
-<!-- ══════════════ PAGE 2 — PROBLEM + OPPORTUNITY ══════════════ -->
+<!-- ══════════════ PAGE 2 — OPERATIONS ══════════════ -->
 <section class="page" id="p2">
-  <div class="p2-strip">
-    <div class="section-tag">Understanding Your Context</div>
-    <h2 class="section-heading">Your Strategic Priorities &amp; the<br><em>AI Intelligence Opportunity</em></h2>
+  <div class="p2-header">
+    <div class="section-eyebrow">Embedding Intelligence Across Finance Operations</div>
+    <h2 class="section-title">Four Areas of <em>Immediate Opportunity</em></h2>
   </div>
 
-  <!-- ARM alignment callout — bridges group deck to individual session -->
-  <div class="alignment-callout" style="margin-top:24px;">
-    <div class="callout-icon">🔗</div>
-    <div class="callout-text">
-      <strong>ARM Hub Point of View — Applied to Your Context</strong>
-      ARM Hub's view is that enterprise SaaS complexity and fragmented data are slowing organisational decision-making. For Bolton Clarke, this manifests specifically as manual reporting layers, disconnected grant and program data, and limited forward-looking financial insight. The AI agent layer addresses these directly.
-    </div>
+  <div class="p2-intro">
+    <p>Leading healthcare finance functions are introducing an intelligent coordination layer that sits above existing systems — including Microsoft-based platforms — to monitor, optimise, and streamline transaction workflows. This enhances existing investments rather than replacing them.</p>
   </div>
 
-  <div class="p2-cols">
-    <!-- LEFT: Your specific priorities -->
-    <div class="p2-col-left">
-      <div class="col-label">Your 6–18 Month Priorities</div>
+  <div class="ops-grid">
 
-      <div class="problem-item">
-        <div class="prob-num">1</div>
-        <div class="prob-body">
-          <h4>System Complexity Without Replacement</h4>
-          <p>ERP platforms, grant tools, donor databases and volunteer systems — individually functional, but fragmented. ARM Hub's view is clear: complexity is slowing the business. The answer is an orchestration layer, not rip-and-replace.</p>
+    <!-- Op 1 -->
+    <div class="op-card">
+      <div class="op-num">01</div>
+      <div class="op-label">Area 01 · Close</div>
+      <div class="op-title">Financial Close Acceleration</div>
+      <div class="op-body">
+        <div>
+          <div class="op-col-label">Friction Points</div>
+          <ul class="op-list">
+            <li>Manual journal validation</li>
+            <li>Reconciliation bottlenecks</li>
+            <li>Variance investigation effort</li>
+            <li>Cross-team coordination delays</li>
+          </ul>
+        </div>
+        <div>
+          <div class="op-col-label">AI Layer Enables</div>
+          <ul class="op-list">
+            <li>Early detection of unusual GL entries</li>
+            <li>Proactive reconciliation alerts</li>
+            <li>Automated variance explanation</li>
+            <li>Real-time close checklist visibility</li>
+          </ul>
         </div>
       </div>
-
-      <div class="problem-item">
-        <div class="prob-num">2</div>
-        <div class="prob-body">
-          <h4>Financial Sustainability at $1.1B Scale</h4>
-          <p>Cost-to-program transparency, grant compliance, overhead ratio management, and scenario modelling for funding volatility. Sustainability is a forward-looking capability — not just a historical outcome.</p>
-        </div>
-      </div>
-
-      <div class="problem-item">
-        <div class="prob-num">3</div>
-        <div class="prob-body">
-          <h4>Finance as Strategic Decision Support</h4>
-          <p>Inconsistent KPIs across programs, manual board packs, limited predictive insight. The inflection point: transitioning finance from reporting history to shaping decisions — exactly where AI agents create highest value.</p>
-        </div>
+      <div class="op-impact">
+        <div class="op-impact-label">Impact</div>
+        <ul>
+          <li>Reduced close cycle duration</li>
+          <li>Lower overtime burden</li>
+          <li>Improved audit readiness</li>
+        </ul>
       </div>
     </div>
 
-    <!-- RIGHT: AI capability layer -->
-    <div class="p2-col-right">
-      <div class="col-label">AI Agent Layer — Bolton Clarke Applications</div>
-
-      <div class="ai-card">
-        <div class="ai-card-label">⚡ Financial Close Acceleration</div>
-        <p>Early detection of unusual GL entries, proactive reconciliation alerts, automated variance explanation support, and real-time close checklist visibility — reducing cycle duration and overtime burden across entities.</p>
+    <!-- Op 2 -->
+    <div class="op-card">
+      <div class="op-num">02</div>
+      <div class="op-label">Area 02 · Payroll</div>
+      <div class="op-title">Payroll &amp; Labour Cost Optimisation</div>
+      <div class="op-body">
+        <div>
+          <div class="op-col-label">Friction Points</div>
+          <ul class="op-list">
+            <li>Overtime anomaly detection gaps</li>
+            <li>Unusual rostering cost spikes</li>
+            <li>Award misclassification risk</li>
+            <li>Labour cost vs occupancy linkage</li>
+          </ul>
+        </div>
+        <div>
+          <div class="op-col-label">AI Layer Enables</div>
+          <ul class="op-list">
+            <li>Overtime anomaly detection</li>
+            <li>Rostering cost spike alerts</li>
+            <li>Award misclassification risk flags</li>
+            <li>Early cost overrun visibility</li>
+          </ul>
+        </div>
       </div>
-
-      <div class="ai-card">
-        <div class="ai-card-label">👥 Payroll &amp; Labour Cost Optimisation</div>
-        <p>Overtime anomaly detection, rostering cost spike identification, award misclassification risk alerts, and occupancy-linked cost correlation — directly protecting margin across 16,000 employees.</p>
-      </div>
-
-      <div class="ai-card">
-        <div class="ai-card-label">🔒 Transaction &amp; Vendor Risk Monitoring</div>
-        <p>Duplicate payment detection, risk-based transaction routing, reduced manual exception handling — turning high-volume AP into a controlled, lower-cost process with clear audit trails.</p>
-      </div>
-
-      <div class="ai-card">
-        <div class="ai-card-label">📊 Management Reporting &amp; Operational Insight</div>
-        <p>Automated variance analysis, consolidated entity reporting, real-time operational-financial dashboards — shifting finance from report assembly to strategic insight delivery.</p>
+      <div class="op-impact">
+        <div class="op-impact-label">Impact</div>
+        <ul>
+          <li>Reduced payroll leakage</li>
+          <li>Faster validation cycles</li>
+          <li>Improved margin control</li>
+        </ul>
       </div>
     </div>
+
+    <!-- Op 3 -->
+    <div class="op-card">
+      <div class="op-num">03</div>
+      <div class="op-label">Area 03 · AP &amp; Payments</div>
+      <div class="op-title">Transaction &amp; Vendor Risk Monitoring</div>
+      <div class="op-body">
+        <div>
+          <div class="op-col-label">Friction Points</div>
+          <ul class="op-list">
+            <li>Duplicate invoices in AP</li>
+            <li>Abnormal vendor patterns</li>
+            <li>Approval delays &amp; routing gaps</li>
+            <li>Exception handling inefficiency</li>
+          </ul>
+        </div>
+        <div>
+          <div class="op-col-label">AI Layer Enables</div>
+          <ul class="op-list">
+            <li>Duplicate payment detection</li>
+            <li>Risk-based transaction routing</li>
+            <li>Reduced manual exception handling</li>
+            <li>Cleaner audit trails</li>
+          </ul>
+        </div>
+      </div>
+      <div class="op-impact">
+        <div class="op-impact-label">Impact</div>
+        <ul>
+          <li>Direct cost savings</li>
+          <li>Reduced rework</li>
+          <li>Improved compliance confidence</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Op 4 -->
+    <div class="op-card">
+      <div class="op-num">04</div>
+      <div class="op-label">Area 04 · Reporting</div>
+      <div class="op-title">Management Reporting &amp; Operational Insight</div>
+      <div class="op-body">
+        <div>
+          <div class="op-col-label">Friction Points</div>
+          <ul class="op-list">
+            <li>Disproportionate assembly time</li>
+            <li>Manual variance analysis</li>
+            <li>Fragmented entity-level view</li>
+            <li>Slow cost trend access</li>
+          </ul>
+        </div>
+        <div>
+          <div class="op-col-label">AI Layer Enables</div>
+          <ul class="op-list">
+            <li>Automated variance analysis</li>
+            <li>Consolidated entity-level reporting</li>
+            <li>Real-time operational dashboards</li>
+            <li>Faster cost trend insights</li>
+          </ul>
+        </div>
+      </div>
+      <div class="op-impact">
+        <div class="op-impact-label">Impact</div>
+        <ul>
+          <li>Less time assembling, more analysing</li>
+          <li>Faster executive decision cycles</li>
+        </ul>
+      </div>
+    </div>
+
   </div>
 
-  <div class="page-footer-bar">
-    <div class="pf-left">
-      <div class="pf-cross"></div>
-      <span class="pf-org">Bolton Clarke</span>
+  <div class="p2-footer">
+    <div class="p2f-left">
+      <div class="p2f-icon"></div>
+      <span style="text-transform:uppercase;letter-spacing:0.18em;">Bolton Clarke</span>
     </div>
-    <span class="pf-pg">02 / 04</span>
+    <span>ARM Hub · Point of View</span>
+    <span>02 / 04</span>
   </div>
 </section>
 
-<!-- ══════════════ PAGE 3 — FINANCIAL INTELLIGENCE MATURITY ══════════════ -->
+<!-- ══════════════ PAGE 3 — MATURITY ══════════════ -->
 <section class="page" id="p3">
-  <div class="p3-strip">
-    <div class="section-tag">Finance Operations Maturity</div>
-    <h2 class="section-heading">Where Is Bolton Clarke Today —<br><em>And Where Should It Be?</em></h2>
+  <div class="p3-header">
+    <div class="section-eyebrow">Financial Intelligence Maturity</div>
+    <h2 class="section-title">Where Is Bolton Clarke Today —<br><em>And Where Should It Be?</em></h2>
   </div>
 
-  <div class="maturity-grid">
-
-    <!-- Stage 1: Reactive -->
-    <div class="maturity-stage">
-      <span class="maturity-bg-num">1</span>
-      <div class="maturity-label">Stage 1 · Reactive</div>
-      <div class="maturity-name">High-Volume, High-Effort</div>
-      <div class="maturity-desc">Finance processes large transaction volumes manually. Close cycles are long. Payroll issues surface post-period. Exception handling is reactive and labour-intensive.</div>
-      <ul class="maturity-caps">
-        <li>Manual reconciliations across entities</li>
-        <li>Payroll validation done retrospectively</li>
-        <li>Duplicate payments caught after the fact</li>
-        <li>Reports assembled manually each cycle</li>
-      </ul>
-      <span class="maturity-indicator arc-current">↙ Common at this scale</span>
-    </div>
-
-    <!-- Stage 2: Controlled -->
-    <div class="maturity-stage">
-      <span class="maturity-bg-num">2</span>
-      <div class="maturity-label">Stage 2 · Controlled</div>
-      <div class="maturity-name">Standardised &amp; Governed</div>
-      <div class="maturity-desc">ERP, payroll, and reporting systems are in place. Workflows are consistent. Controls exist — but require significant manual effort to operate and monitor across entities.</div>
-      <ul class="maturity-caps">
-        <li>ERP, payroll &amp; Microsoft tools operational</li>
-        <li>Approval workflows defined per entity</li>
-        <li>Audit-ready — but labour intensive</li>
-        <li>Close cycle managed but duration is long</li>
-      </ul>
-      <span class="maturity-indicator arc-current">← Bolton Clarke's current position</span>
-    </div>
-
-    <!-- Stage 3: Intelligent -->
-    <div class="maturity-stage">
-      <span class="maturity-bg-num">3</span>
-      <div class="maturity-label">Stage 3 · Intelligent</div>
-      <div class="maturity-name">Automated &amp; Proactive</div>
-      <div class="maturity-desc">An AI coordination layer sits above existing platforms — monitoring transactions, flagging anomalies, accelerating close, and automating reporting — without replacing core systems.</div>
-      <ul class="maturity-caps">
-        <li>Real-time payroll &amp; labour cost monitoring</li>
-        <li>Automated duplicate payment detection</li>
-        <li>Close acceleration with proactive alerts</li>
-        <li>Operational-financial dashboards live</li>
-      </ul>
-      <span class="maturity-indicator arc-target">→ Near-term target (6–12 months)</span>
-    </div>
-
-    <!-- Stage 4: Strategic -->
-    <div class="maturity-stage">
-      <span class="maturity-bg-num">4</span>
-      <div class="maturity-label">Stage 4 · Strategic</div>
-      <div class="maturity-name">Optimised &amp; Insight-Driven</div>
-      <div class="maturity-desc">Finance operates as a lean, intelligent function across all ANZ entities. Predictive cost modelling, automated cross-entity reporting, and AI-assisted planning cycles drive enterprise-wide efficiency.</div>
-      <ul class="maturity-caps">
-        <li>Predictive labour cost &amp; occupancy modelling</li>
-        <li>ANZ-wide automated close &amp; reporting</li>
-        <li>AI-assisted budget &amp; planning cycles</li>
-        <li>Transaction cost per process benchmarked &amp; optimised</li>
-      </ul>
-      <span class="maturity-indicator arc-target">→ Medium-term ambition (12–24 months)</span>
-    </div>
-
+  <div class="maturity-intro">
+    <p>Large, transaction-intensive finance functions typically sit at Stage 2 — controlled and stable, but still heavily manual. The opportunity is to move to Stage 3: real-time intelligence embedded across existing workflows, without disrupting the systems already in place.</p>
   </div>
 
-  <div class="why-now">
-    <div>
-      <div class="why-quote-block">
-        <div class="why-quote">
-          For an organisation of the scale and public trust of Bolton Clarke, the opportunity is not simply automation — it is strengthening the financial intelligence backbone that supports mission delivery.
-        </div>
+  <div class="maturity-track">
+    <div class="maturity-spine">
+      <div class="spine-seg"></div>
+      <div class="spine-seg"></div>
+      <div class="spine-seg"></div>
+      <div class="spine-seg"></div>
+    </div>
+
+    <div class="maturity-stages">
+
+      <div class="m-stage">
+        <div class="m-ghost-num">1</div>
+        <div class="m-tag">Stage 1 · Reactive</div>
+        <div class="m-name">Manual &amp; Retrospective</div>
+        <div class="m-desc">Finance operates on historical data. Month-end close is labour-intensive. Exceptions and anomalies are caught late — after cost or risk has already materialised.</div>
+        <ul class="m-caps">
+          <li>Spreadsheet-driven reconciliations</li>
+          <li>Manual payroll validation cycles</li>
+          <li>No real-time AP or GL oversight</li>
+          <li>Reporting assembled from scratch</li>
+        </ul>
+        <span class="m-badge badge-current">Common starting point</span>
       </div>
-      <div class="arm-align-note">
-        <p>ARM Hub AI Agent Strategy — translated to your finance function</p>
-      </div>
-    </div>
 
-    <div class="why-right-block">
-      <div class="why-right-tag">Why This Approach, Why Now</div>
-      <div class="why-item"><div class="why-dot"></div><div class="why-text">Reduce the cost of manual reconciliation, exception handling, and reporting assembly</div></div>
-      <div class="why-item"><div class="why-dot"></div><div class="why-text">Grounded in ARM Hub's point of view on enterprise AI adoption — applied to your Microsoft and ERP environment</div></div>
-      <div class="why-item"><div class="why-dot"></div><div class="why-text">Accelerate close cycles and reduce month-end overtime burden across entities</div></div>
-      <div class="why-item"><div class="why-dot"></div><div class="why-text">Strengthen payroll and vendor controls at scale without adding headcount</div></div>
-      <div class="why-item"><div class="why-dot"></div><div class="why-text">Build operational intelligence without wholesale system replacement</div></div>
+      <div class="m-stage">
+        <div class="m-ghost-num">2</div>
+        <div class="m-tag">Stage 2 · Controlled</div>
+        <div class="m-name">Standardised &amp; Governed</div>
+        <div class="m-desc">Core systems are in place. ERP, payroll, Microsoft tools are operational. Controls exist — but remain largely manual. Compliance is maintained at high effort cost.</div>
+        <ul class="m-caps">
+          <li>ERP, payroll &amp; AP platforms live</li>
+          <li>Defined approval workflows</li>
+          <li>Consistent close process — but slow</li>
+          <li>Audit-ready with significant effort</li>
+        </ul>
+        <span class="m-badge badge-current">← Bolton Clarke today</span>
+      </div>
+
+      <div class="m-stage">
+        <div class="m-ghost-num">3</div>
+        <div class="m-tag">Stage 3 · Intelligent</div>
+        <div class="m-name">Real-Time &amp; Automated</div>
+        <div class="m-desc">An AI coordination layer sits above existing systems — monitoring in real time, automating routine governance, and surfacing exceptions before they become problems.</div>
+        <ul class="m-caps">
+          <li>Continuous GL &amp; payroll monitoring</li>
+          <li>Duplicate payment detection live</li>
+          <li>Automated close tracking &amp; alerts</li>
+          <li>Executive dashboards updated in real time</li>
+        </ul>
+        <span class="m-badge badge-near">→ Target: 6–12 months</span>
+      </div>
+
+      <div class="m-stage">
+        <div class="m-ghost-num">4</div>
+        <div class="m-tag">Stage 4 · Strategic</div>
+        <div class="m-name">Predictive &amp; Forward-Looking</div>
+        <div class="m-desc">Finance drives business decisions. Predictive labour cost modelling, occupancy-linked forecasting, and entity-level benchmarking transform the finance function into a strategic asset.</div>
+        <ul class="m-caps">
+          <li>Predictive labour &amp; occupancy modelling</li>
+          <li>ANZ entity performance benchmarking</li>
+          <li>AI-assisted planning &amp; scenario analysis</li>
+          <li>Automated multi-entity consolidation</li>
+        </ul>
+        <span class="m-badge badge-far">→ Ambition: 12–24 months</span>
+      </div>
+
     </div>
   </div>
 
-  <div class="next-steps">
-    <div class="ns-text">We propose a focused operational efficiency diagnostic to map your current finance workflows against the intelligence blueprint — and quantify the highest-value optimisation opportunities for Bolton Clarke specifically.</div>
-    <div class="ns-cta">Proposed Next Step →</div>
+  <div class="p3-bottom">
+    <div class="why-band">
+      <div class="why-band-tag">Why This Approach, Why Now</div>
+      <div class="why-item"><div class="why-dot"></div><div class="why-text">Reduce manual overhead without replacing core systems</div></div>
+      <div class="why-item"><div class="why-dot"></div><div class="why-text">Accelerate close cycles and free finance capacity for strategic analysis</div></div>
+      <div class="why-item"><div class="why-dot"></div><div class="why-text">Strengthen payroll governance across 16,000 employees at scale</div></div>
+      <div class="why-item"><div class="why-dot"></div><div class="why-text">Improve cost visibility and margin control across ANZ entities</div></div>
+      <div class="why-item"><div class="why-dot"></div><div class="why-text">Build AI capability incrementally — disciplined, controlled, and measurable</div></div>
+    </div>
+    <div class="cta-band">
+      <div class="cta-quote">For an organisation of Bolton Clarke's scale, small efficiency gains per transaction compound quickly. The opportunity is not transformation — it is precision optimisation of what already exists.</div>
+      <div class="cta-action">Proposed Next Step →</div>
+    </div>
   </div>
 
   <div class="p3-footer">
     <div class="p3f-left">
-      <div class="p3f-cross"></div>
-      <span class="p3f-org">Bolton Clarke</span>
+      <div class="p3f-icon"></div>
+      <span style="text-transform:uppercase;letter-spacing:0.18em;">Bolton Clarke</span>
     </div>
-    <span class="p3f-hub">ARM Hub · Enterprise AI Agent Strategy</span>
-    <span class="p3f-pg">03 / 04</span>
+    <span>ARM Hub · Point of View</span>
+    <span>03 / 04</span>
   </div>
 </section>
 
-
+<!-- ══════════════ PAGE 4 — DELIVERY TABLE ══════════════ -->
 <section class="page" id="p4">
-  <div class="p4-strip">
-    <div class="p4-eyebrow">AI-Enabled Finance Operations Optimisation</div>
+  <div class="p4-header">
+    <div class="p4-eyebrow">AI-Enabled Finance Efficiency Roadmap</div>
     <div class="p4-title">Structured Path to Measurable Value</div>
-    <div class="p4-subtitle">A seven-phase delivery model — from operational diagnostic to ANZ-wide efficiency at scale</div>
+    <div class="p4-subtitle">Seven phases from diagnostic to proven, scalable impact across ANZ entities</div>
   </div>
 
-  <div class="p4-table-wrap">
+  <div class="p4-wrap">
     <table class="p4-table">
       <thead>
         <tr>
-          <th style="width:14%">Phase</th>
-          <th style="width:10%">Focus Area</th>
+          <th style="width:15%">Phase</th>
+          <th style="width:11%">Focus Area</th>
           <th style="width:26%">Key Activities</th>
-          <th style="width:24%">Key Deliverables</th>
+          <th style="width:22%">Key Deliverables</th>
           <th style="width:26%">Value Measurement</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td class="phase-cell">
-            <span class="phase-num">1</span>
-            <span class="phase-name">Operational Efficiency Diagnostic</span>
-            <span class="phase-timeline">Weeks 1–4</span>
+          <td class="ph-cell">
+            <span class="ph-num">1</span>
+            <span class="ph-name">Operational Efficiency Diagnostic</span>
+            <span class="ph-time">Weeks 1–4</span>
           </td>
           <td class="focus-cell">Identify cost &amp; process friction</td>
-          <td class="activities-cell">
-            <ul class="act-list">
-              <li>Map financial close, payroll validation, AP/AR workflows</li>
-              <li>Quantify manual reconciliations; baseline cycle times &amp; exception volumes</li>
-            </ul>
-          </td>
-          <td class="deliv-cell">
-            <ul class="deliv-list">
-              <li>Process heatmap</li>
-              <li>Baseline cost &amp; cycle metrics</li>
-              <li>Exception analysis</li>
-            </ul>
-          </td>
-          <td class="value-cell">Documented manual intervention rate; close duration; payroll validation effort</td>
+          <td><ul class="act-list">
+            <li>Map financial close, payroll validation, AP/AR workflows</li>
+            <li>Quantify manual reconciliations</li>
+            <li>Baseline cycle times &amp; exception volumes</li>
+          </ul></td>
+          <td><ul class="del-list">
+            <li>Process heatmap</li>
+            <li>Baseline cost &amp; cycle metrics</li>
+            <li>Exception analysis</li>
+          </ul></td>
+          <td class="val-cell">Documented manual intervention rate; close duration; payroll validation effort</td>
         </tr>
 
         <tr>
-          <td class="phase-cell">
-            <span class="phase-num">2</span>
-            <span class="phase-name">Priority Use Case &amp; Business Case Definition</span>
-            <span class="phase-timeline">Weeks 4–6</span>
+          <td class="ph-cell">
+            <span class="ph-num">2</span>
+            <span class="ph-name">Priority Use Case &amp; Business Case Definition</span>
+            <span class="ph-time">Weeks 4–6</span>
           </td>
           <td class="focus-cell">Select high-impact starting point</td>
-          <td class="activities-cell">
-            <ul class="act-list">
-              <li>Prioritise close monitoring, payroll anomaly detection, or vendor risk monitoring</li>
-              <li>Estimate cost impact; define measurable targets</li>
-            </ul>
-          </td>
-          <td class="deliv-cell">
-            <ul class="deliv-list">
-              <li>Prioritised use case shortlist</li>
-              <li>Financial impact estimate</li>
-              <li>Defined KPIs</li>
-            </ul>
-          </td>
-          <td class="value-cell">Estimated annualised savings; projected cycle-time reduction</td>
+          <td><ul class="act-list">
+            <li>Prioritise close monitoring, payroll anomaly detection, or vendor risk</li>
+            <li>Estimate cost impact; define measurable targets</li>
+          </ul></td>
+          <td><ul class="del-list">
+            <li>Prioritised use case shortlist</li>
+            <li>Financial impact estimate</li>
+            <li>Defined KPIs</li>
+          </ul></td>
+          <td class="val-cell">Estimated annualised savings; projected cycle-time reduction</td>
         </tr>
 
         <tr>
-          <td class="phase-cell">
-            <span class="phase-num">3</span>
-            <span class="phase-name">Future-State Workflow Design</span>
-            <span class="phase-timeline">Weeks 6–8</span>
+          <td class="ph-cell">
+            <span class="ph-num">3</span>
+            <span class="ph-name">Future-State Workflow Design</span>
+            <span class="ph-time">Weeks 6–8</span>
           </td>
           <td class="focus-cell">Redesign inefficient processes</td>
-          <td class="activities-cell">
-            <ul class="act-list">
-              <li>Simplify approval flows; define monitoring thresholds</li>
-              <li>Align to Microsoft ecosystem; formalise governance checkpoints</li>
-            </ul>
-          </td>
-          <td class="deliv-cell">
-            <ul class="deliv-list">
-              <li>To-Be workflow maps</li>
-              <li>Monitoring framework</li>
-              <li>Control documentation</li>
-            </ul>
-          </td>
-          <td class="value-cell">Reduction in approval layers; improved clarity of exception ownership</td>
+          <td><ul class="act-list">
+            <li>Simplify approval flows; define monitoring thresholds</li>
+            <li>Align to Microsoft ecosystem</li>
+            <li>Formalise governance checkpoints</li>
+          </ul></td>
+          <td><ul class="del-list">
+            <li>To-Be workflow maps</li>
+            <li>Monitoring framework</li>
+            <li>Control documentation</li>
+          </ul></td>
+          <td class="val-cell">Reduction in approval layers; improved clarity of exception ownership</td>
         </tr>
 
-        <tr class="phase-group-break">
-          <td class="phase-cell">
-            <span class="phase-num">4</span>
-            <span class="phase-name">Controlled Pilot Deployment</span>
-            <span class="phase-timeline">Weeks 9–16</span>
+        <tr class="group-break">
+          <td class="ph-cell">
+            <span class="ph-num">4</span>
+            <span class="ph-name">Controlled Pilot Deployment</span>
+            <span class="ph-time">Weeks 9–16</span>
           </td>
           <td class="focus-cell">Deploy first optimisation capability</td>
-          <td class="activities-cell">
-            <ul class="act-list">
-              <li>Integrate monitoring into selected workflow</li>
-              <li>Deploy to limited entity; track impact vs baseline</li>
-            </ul>
-          </td>
-          <td class="deliv-cell">
-            <ul class="deliv-list">
-              <li>Live pilot deployment</li>
-              <li>Operational dashboard</li>
-              <li>Pilot impact report</li>
-            </ul>
-          </td>
-          <td class="value-cell">Reduction in duplicate payments; faster payroll validation; reduced close cycle time</td>
+          <td><ul class="act-list">
+            <li>Integrate monitoring into selected workflow</li>
+            <li>Deploy to limited entity</li>
+            <li>Track impact vs baseline</li>
+          </ul></td>
+          <td><ul class="del-list">
+            <li>Live pilot deployment</li>
+            <li>Operational dashboard</li>
+            <li>Pilot impact report</li>
+          </ul></td>
+          <td class="val-cell">Reduction in duplicate payments; faster payroll validation; reduced close cycle time</td>
         </tr>
 
         <tr>
-          <td class="phase-cell">
-            <span class="phase-num">5</span>
-            <span class="phase-name">Reporting &amp; Insight Layer Activation</span>
-            <span class="phase-timeline">Months 4–6</span>
+          <td class="ph-cell">
+            <span class="ph-num">5</span>
+            <span class="ph-name">Reporting &amp; Insight Layer Activation</span>
+            <span class="ph-time">Months 4–6</span>
           </td>
           <td class="focus-cell">Improve management visibility</td>
-          <td class="activities-cell">
-            <ul class="act-list">
-              <li>Implement operational-financial dashboard</li>
-              <li>Automate variance reporting; enable close-progress tracking</li>
-            </ul>
-          </td>
-          <td class="deliv-cell">
-            <ul class="deliv-list">
-              <li>Executive performance dashboard</li>
-              <li>Automated reporting outputs</li>
-            </ul>
-          </td>
-          <td class="value-cell">Reduced reporting preparation time; faster variance detection</td>
+          <td><ul class="act-list">
+            <li>Implement operational-financial dashboard</li>
+            <li>Automate variance reporting</li>
+            <li>Enable close-progress tracking</li>
+          </ul></td>
+          <td><ul class="del-list">
+            <li>Executive performance dashboard</li>
+            <li>Automated reporting outputs</li>
+          </ul></td>
+          <td class="val-cell">Reduced reporting preparation time; faster variance detection</td>
         </tr>
 
         <tr>
-          <td class="phase-cell">
-            <span class="phase-num">6</span>
-            <span class="phase-name">Embedding &amp; Institutionalisation</span>
-            <span class="phase-timeline">Months 5–7</span>
+          <td class="ph-cell">
+            <span class="ph-num">6</span>
+            <span class="ph-name">Embedding &amp; Institutionalisation</span>
+            <span class="ph-time">Months 5–7</span>
           </td>
           <td class="focus-cell">Drive sustained adoption</td>
-          <td class="activities-cell">
-            <ul class="act-list">
-              <li>Update SOPs; train finance teams</li>
-              <li>Embed monitoring into monthly routines; define accountability model</li>
-            </ul>
-          </td>
-          <td class="deliv-cell">
-            <ul class="deliv-list">
-              <li>Updated operating model</li>
-              <li>Training materials</li>
-              <li>Adoption tracking</li>
-            </ul>
-          </td>
-          <td class="value-cell">Lower rework rates; improved team productivity; reduced manual reconciliations</td>
+          <td><ul class="act-list">
+            <li>Update SOPs; train finance teams</li>
+            <li>Embed monitoring into monthly routines</li>
+            <li>Define accountability model</li>
+          </ul></td>
+          <td><ul class="del-list">
+            <li>Updated operating model</li>
+            <li>Training materials</li>
+            <li>Adoption tracking</li>
+          </ul></td>
+          <td class="val-cell">Lower rework rates; improved team productivity; reduced manual reconciliations</td>
         </tr>
 
         <tr>
-          <td class="phase-cell">
-            <span class="phase-num">7</span>
-            <span class="phase-name">Measured Value Realisation &amp; Scaling</span>
-            <span class="phase-timeline">Months 6–9</span>
+          <td class="ph-cell">
+            <span class="ph-num">7</span>
+            <span class="ph-name">Measured Value Realisation &amp; Scaling</span>
+            <span class="ph-time">Months 6–9</span>
           </td>
           <td class="focus-cell">Expand across ANZ entities</td>
-          <td class="activities-cell">
-            <ul class="act-list">
-              <li>Compare baseline vs results; quantify savings</li>
-              <li>Extend to additional processes (AP, AR, funding claims)</li>
-            </ul>
-          </td>
-          <td class="deliv-cell">
-            <ul class="deliv-list">
-              <li>Value Realisation Report</li>
-              <li>ANZ scaling roadmap</li>
-            </ul>
-          </td>
-          <td class="value-cell">Measurable reduction in transaction cost per process; sustained close acceleration</td>
+          <td><ul class="act-list">
+            <li>Compare baseline vs results; quantify savings</li>
+            <li>Extend to additional processes (AP, AR, funding claims)</li>
+          </ul></td>
+          <td><ul class="del-list">
+            <li>Value Realisation Report</li>
+            <li>ANZ scaling roadmap</li>
+          </ul></td>
+          <td class="val-cell">Measurable reduction in transaction cost per process; sustained close acceleration</td>
         </tr>
       </tbody>
     </table>
@@ -1350,8 +1245,8 @@ body {
 
   <div class="p4-footer">
     <div class="p4f-left">
-      <div class="p4f-cross"></div>
-      <span class="p4f-org">Bolton Clarke</span>
+      <div class="p4f-icon"></div>
+      <span style="text-transform:uppercase;letter-spacing:0.18em;">Bolton Clarke</span>
     </div>
     <span>ARM Hub · Point of View</span>
     <span>04 / 04</span>
@@ -1360,7 +1255,7 @@ body {
 
 <script>
   const pages = document.querySelectorAll('.page');
-  const dots = document.querySelectorAll('.nav a');
+  const dots  = document.querySelectorAll('.nav a');
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (e.isIntersecting) {
